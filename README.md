@@ -4,7 +4,7 @@ Assignment 3 of ES 335: Machine Learning Course (Spring 2024) - TensionFlow
 
 Assignment 3 Problem Statements: [Problem Statements](https://docs.google.com/document/d/1L5XDsPuqt7dKkQG5TKphRKismIArL4Qn8UKfXuFqQw0/edit)
 
-
+**Datasets: [Link](https://cs.stanford.edu/people/karpathy/char-rnn/)**
 1. Replicate the [notebook](https://nipunbatra.github.io/ml-teaching/notebooks/names.html) on the next character prediction and use it for generation of text. Use one of the datasets specified below for training. Refer to Andrej Karpathy’s blog post on [Effectiveness of RNNs](http://karpathy.github.io/2015/05/21/rnn-effectiveness/). Visualise the embeddings using t-SNE if using more than 2 dimensions or using a scatter plot if using 2 dimensions. Write a streamlit application which asks users for an input text and it then predicts next k characters **[5 marks]**
 
     Datasets (first few based on Effectiveness of RNN blog post from Karpathy et al.)
