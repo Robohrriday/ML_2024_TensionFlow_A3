@@ -1,10 +1,16 @@
 # ML_2024_TensionFlow_A3
 
 Assignment 3 of ES 335: Machine Learning Course (Spring 2024) - TensionFlow
-
 Assignment 3 Problem Statements: [Problem Statements](https://docs.google.com/document/d/1L5XDsPuqt7dKkQG5TKphRKismIArL4Qn8UKfXuFqQw0/edit)
 
 **Datasets: [Link](https://cs.stanford.edu/people/karpathy/char-rnn/)**
+
+### **Embedding the characters as a Vector $\in \mathbb{R}^N$**
+![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/Embed.svg)
+
+### **Input layer of the model and creating the training examples**
+![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/ModelEmbed.svg)
+![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/MLPToken.svg)
 
 To train the model on ```tolstoy.txt``` run the script:
 ```bash
