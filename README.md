@@ -9,25 +9,26 @@ Assignment 3 Problem Statements: [Problem Statements](https://docs.google.com/do
 
     Datasets (first few based on Effectiveness of RNN blog post from Karpathy et al.)
 
-1. Paul Graham essays
-2. Wikipedia (English)
-3. Shakespeare
-4. [Maths texbook](https://github.com/stacks/stacks-project)
-5. Something comparable in spirit but of your choice (do confirm with TA Ayush)
+    * Paul Graham essays
+    * Wikipedia (English)
+    * Shakespeare
+    * [Maths texbook](https://github.com/stacks/stacks-project)
+    * Something comparable in spirit but of your choice (do confirm with TA Ayush)
 
 
 2. Learn the following models on XOR dataset (refer to Tensorflow Playground and generate the dataset on your own containing 200 training instances and 200 test instances) such that all these models achieve similar results (good). The definition of good is left subjective – but you would expect the classifier to capture the shape of the XOR function.
 
-1. a MLP
-2. MLP w/ L1 regularization (you may vary the penalty coefficient by choose the best one using a validation dataset)
-3. MLP w/ L2 regularization (you may vary the penalty coefficient by choose the best one using a validation dataset)
-4. learn logistic regression models on the same data with additional features (such as x1*x2, x1^2, etc.)
+    * a MLP
+    * MLP w/ L1 regularization (you may vary the penalty coefficient by choose the best one using a validation dataset)
+    * MLP w/ L2 regularization (you may vary the penalty coefficient by choose the best one using a validation dataset)
+    * learn logistic regression models on the same data with additional features (such as x1*x2, x1^2, etc.)
 
 Show the decision surface and comment on the plots obtained for different models. **[2 marks]**
 
 
 3. Using the [Mauna Lua CO2 dataset](https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv) (monthly) perform forecasting using an MLP and compare the results with that of MA (Moving Average) and ARMA (Auto Regressive Moving Average)  models. Main setting: use previous “K” readings to predict next “T” reading. Example, if “K=3” and “T=1” then we use data from Jan, Feb, March and then predict the reading for April. Comment on why you observe such results. For MA or ARMA you can use any library or implement it from scratch. The choice of MLP is up to you. **[2 marks]**
-5. Train on MNIST dataset using an MLP. The original training dataset contains 60,000 images and test contains 10,000 images. If you are short on compute, use a stratified subset of a smaller number of images. But, the test set remains the same 10,000 images. Compare against RF and Logistic Regression models.  The metrics can be: F1-score, confusion matrix. What do you observe? What all digits are commonly confused?
+   
+4. Train on MNIST dataset using an MLP. The original training dataset contains 60,000 images and test contains 10,000 images. If you are short on compute, use a stratified subset of a smaller number of images. But, the test set remains the same 10,000 images. Compare against RF and Logistic Regression models.  The metrics can be: F1-score, confusion matrix. What do you observe? What all digits are commonly confused?
 
 Let us assume your MLP has 30 neurons in first layer, 20 in second layer and then 10 finally for the output layer (corresponding to 10 classes). On the trained MLP, plot the t-SNE for the output from the layer containing 20 neurons for the 10 digits. Contrast this with the t-SNE for the same layer but for an untrained model. What do you conclude?
 
