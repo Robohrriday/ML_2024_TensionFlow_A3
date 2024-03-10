@@ -8,7 +8,6 @@ from pprint import pprint
 from sklearn.manifold import TSNE
 import torch._dynamo
 import warnings
-import keyboard
 warnings.filterwarnings("ignore")
 torch._dynamo.config.suppress_errors = True
 
@@ -81,6 +80,28 @@ emb_dim = 15
 emb = torch.nn.Embedding(len(stoi), emb_dim)
 print(f"Embeddings Shape: {emb.weight.shape}\n\n")
 
+
+def plot_emb(emb, itos, ax = None):
+    if emb.weight.shape[1] != 2:
+      tsne = TSNE(n_components = 2)
+      emb_new = tsne.fit_transform(emb.weight.detach().cpu().numpy())
+    if ax is None:
+        fig, ax = plt.subplots()
+    for i in range(len(itos)):
+        if emb.weight.shape[1] == 2:
+          x, y = emb.weight[i].detach().cpu().numpy()
+          ax.scatter(x, y, color='k')
+          ax.text(x + 0.05, y + 0.05, itos[i])
+          ax.set_title("2D Embeddings Before Training")
+        else:
+          x, y = emb_new[i]
+          ax.scatter(x, y, color = 'k')
+          ax.text(x + 0.05, y + 0.05, itos[i])
+          ax.set_title("2D Embeddings using t-SNE After Training")
+    return ax
+
+
+
 model = NextChar(block_size, len(stoi), emb_dim, 30).to(device)
 model = torch.compile(model)
 print("Model Architecture:\n")
@@ -108,28 +129,36 @@ def generate_text(model, itos, stoi, block_size, max_len, start_str = None):
     return text
 
 
+old_text = generate_text(model, itos, stoi, block_size, 1000, "This is ")
+print("\n======================================================\n")
+print("Generated Text from Untrained Model: \n")
+print(old_text)
+
+device = torch.device("cpu")
+model.load_state_dict(torch.load("model.pth", map_location = device))
 
 print("\n======================================================\n")
-print("Press 'q' to interrupt the training process.\n")
-### TRAINING THE MODEL
-loss_fn = nn.CrossEntropyLoss()
-opt = torch.optim.AdamW(model.parameters(), lr = 0.01)
-batch_size = 4096
-print_every = 100
-for epoch in range(10000):
-    for i in range(0, X.shape[0], batch_size):
-        x = X[i : i + batch_size]
-        y = Y[i : i + batch_size]
-        y_pred = model(x)
-        loss = loss_fn(y_pred, y)
-        loss.backward()
-        opt.step()
-        opt.zero_grad()
-    if epoch % print_every == 0:
-        print(epoch, loss.item())
-        
-    if keyboard.is_pressed('q'):
-        print("Training interrupted by user.")
-        break   
+txt = input("Enter the starting string:\n")
+fill = int(input("Enter the length to be generated:\n"))
 
-model.save(model.state_dict(), "modelDemo.pth")
+my_str = generate_text(model, itos, stoi, block_size, fill, txt)
+print("\n======================================================\n")
+print("Generated Text from Trained Model: \n")
+print(my_str)
+
+
+
+latexify(columns=2, fig_width=10)
+
+# Plotting the embeddings before training
+ax1 = plt.subplot(1, 2, 1)
+plot_emb(emb, itos, ax=ax1)
+format_axes(ax1)
+
+# Plotting the embeddings after training
+ax2 = plt.subplot(1, 2, 2)
+plot_emb(model.emb, itos, ax=ax2)
+format_axes(ax2)
+
+plt.tight_layout()
+plt.show()
