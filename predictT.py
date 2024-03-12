@@ -44,7 +44,7 @@ new_tolstoy = ""
 for char in tolstoy:
     if char in ['à', 'ä', 'é', 'ê']:
         continue
-    new_tolstoy += char
+    new_tolstoy += char.lower()
 
 characters = sorted(list(set(new_tolstoy)))
 print(f"Total Characters in the Corpus: {len(new_tolstoy)}\n")
@@ -60,8 +60,7 @@ print(f"Dictionary Mapping of indices to characters:\n{itos}\n\n")
 
 
 ### CREATING TRAINING SAMPLES
-block_size = 10
-start = 0
+block_size = 100
 X, Y = [], []
 context = [0] * block_size
 for idx in range(len(new_tolstoy)):
@@ -77,7 +76,7 @@ print(f"Training Samples: {X.shape}\nLabels:{Y.shape}\n\n")
 
 
 ### EMBEDDING LAYER
-emb_dim = 15
+emb_dim = 256
 emb = torch.nn.Embedding(len(stoi), emb_dim)
 print(f"Embeddings Shape: {emb.weight.shape}\n\n")
 
@@ -103,7 +102,7 @@ def plot_emb(emb, itos, ax = None):
 
 
 
-model = NextChar(block_size, len(stoi), emb_dim, 30).to(device)
+model = NextChar(block_size, len(stoi), emb_dim, 100).to(device)
 model = torch.compile(model)
 print("Model Architecture:\n")
 for param_name, param in model.named_parameters():
@@ -129,26 +128,26 @@ def generate_text(model, itos, stoi, block_size, max_len, start_str = None):
         context = context[1:] + [ix]
     return text
 
+start = np.random.randint(0, len(new_tolstoy) - block_size - 1)
+end = start + block_size
+while new_tolstoy[start] != " ":
+  start += 1
 
-old_text = generate_text(model, itos, stoi, block_size, 1000, "This is ")
+while new_tolstoy[end] != " ":
+  end -= 1
+
+seed_text = new_tolstoy[start + 1 : end]
+my_str = generate_text(model, itos, stoi, block_size, 1000, seed_text)
+old_text = bytes(my_str, "utf-8").decode("unicode_escape")
+print(f"==================Seed Text=================\n{seed_text}\n")
 print("\n======================================================\n")
 print("Generated Text from Untrained Model: \n")
 print(old_text)
 
 device = torch.device("cpu")
-model.load_state_dict(torch.load("model.pth", map_location = device))
+model.load_state_dict(torch.load("modelTolstoy.pth", map_location = device))
 
 
-start = np.random.randint(0, len(new_tolstoy) - block_size - 1)
-end = start + block_size
-# while new_tolstoy[start] != " ":
-#   start += 1
-
-# while new_tolstoy[end] != " ":
-#   end -= 1
-
-seed_text = new_tolstoy[start + 1 : end]
-print(f"==================Seed Text=================\n{seed_text}\n")
 my_str = generate_text(model, itos, stoi, block_size, 1000, seed_text)
 decoded_string = bytes(my_str, "utf-8").decode("unicode_escape")
 print(f"\n===============Predicted Text===============\n{decoded_string}")
