@@ -12,11 +12,25 @@ Assignment 3 Problem Statements: [Problem Statements](https://docs.google.com/do
 ### **Input layer of the model and creating the training examples**
 
 ![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/ModelEmbed.svg)
-![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/MLPToken.svg)To run the StreamLit App, run the script:
+![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/MLPToken.svg)
 
+
+To make inference from the model trained on ```tolstoy.txt```, run the script:
+```bash
+python3 predictT.py
+```
+
+To make inference from the model trained on ```wonderland.txt```, run the script:
+```bash
+python3 predictW.py
+```
+
+To run the StreamLit App, run the script:
 ```bash
 streamlit run app.py
 ```
+
+### Find the deployed app at [Link](https://tensionflowcharpredict.streamlit.app/)
 
 1. Replicate the [notebook](https://nipunbatra.github.io/ml-teaching/notebooks/names.html) on the next character prediction and use it for generation of text. Use one of the datasets specified below for training. Refer to Andrej Karpathy’s blog post on [Effectiveness of RNNs](http://karpathy.github.io/2015/05/21/rnn-effectiveness/). Visualise the embeddings using t-SNE if using more than 2 dimensions or using a scatter plot if using 2 dimensions. Write a streamlit application which asks users for an input text and it then predicts next k characters **[5 marks]**
 
