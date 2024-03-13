@@ -71,7 +71,7 @@ option = st.radio("Generate the Seed Text?", ("Yes", "No"))
 
 if (select == "Tolstoy's War and Peace"):
     
-    fileTolstoy = open("tolstoy.txt", "r")
+    fileTolstoy = open("./corpora/tolstoy.txt", "r")
     tolstoy = fileTolstoy.read()
 
     new_tolstoy = ""
@@ -109,7 +109,7 @@ if (select == "Tolstoy's War and Peace"):
     if btn:
         st.subheader("Seed Text")
         st.write_stream(stream_data(seed_text))
-        model.load_state_dict(torch.load("modelTolstoy.pth", map_location = device))
+        model.load_state_dict(torch.load("./models/modelTolstoy.pth", map_location = device))
         my_str = generate_text(model, itos, stoi, block_size, k, seed_text)
         decoded_string = bytes(my_str, "utf-8").decode("unicode_escape")
         st.header("Generated Text")
@@ -120,7 +120,7 @@ if (select == "Tolstoy's War and Peace"):
         st.sidebar.write_stream(stream_data(decoded_string))
     
 elif (select == "Alice in the Wonderland"):
-    fileWonder = open("wonderland.txt", "r")
+    fileWonder = open("./corpora/wonderland.txt", "r")
     wonder = fileWonder.read()
     print(wonder[:1000])
     new_wonder = ""
@@ -157,7 +157,7 @@ elif (select == "Alice in the Wonderland"):
     if btn:
         st.subheader("Seed Text")
         st.write_stream(stream_data(seed_text))
-        model.load_state_dict(torch.load("modelWonder.pth", map_location = device))
+        model.load_state_dict(torch.load("./models/modelWonder.pth", map_location = device))
         my_str = generate_text(model, itos, stoi, block_size, k, seed_text)
         decoded_string = bytes(my_str, "utf-8").decode("unicode_escape")
         st.header("Generated Text")
@@ -168,7 +168,7 @@ elif (select == "Alice in the Wonderland"):
         st.sidebar.write_stream(stream_data(decoded_string))
         
 elif (select == "Atomic Habits: James Clear"):
-    fileAtomic = open("atomic.txt", "r")
+    fileAtomic = open("./corpora/atomic.txt", "r")
     atomic = fileAtomic.read()
     print(atomic[:1000])
     new_atomic = ""
@@ -224,7 +224,7 @@ elif (select == "Atomic Habits: James Clear"):
     if btn:
         st.subheader("Seed Text")
         st.write_stream(stream_data(seed_text))
-        model.load_state_dict(torch.load("modelAtomic.pth", map_location = device))
+        model.load_state_dict(torch.load("./models/modelAtomic.pth", map_location = device))
         my_str = generate_text(model, itos, stoi, block_size, k, seed_text)
         decoded_string = bytes(my_str, "utf-8").decode("unicode_escape")
         st.header("Generated Text")
