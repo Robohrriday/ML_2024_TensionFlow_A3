@@ -7,30 +7,22 @@ Assignment 3 Problem Statements: [Problem Statements](https://docs.google.com/do
 
 ### **Embedding the characters as a Vector $\in \mathbb{R}^N$**
 
-![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/Embed.svg)
+![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/media/Embed.svg)
 
 ### **Input layer of the model and creating the training examples**
 
-![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/ModelEmbed.svg)
-![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/MLPToken.svg)
 
+![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/media/ModelEmbed.svg)
+![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/media/MLPToken.svg)
 
-To make inference from the model trained on ```tolstoy.txt```, run the script:
-```bash
-python3 predictT.py
-```
-
-To make inference from the model trained on ```wonderland.txt```, run the script:
-```bash
-python3 predictW.py
-```
 
 To run the StreamLit App, run the script:
 ```bash
 streamlit run app.py
 ```
 
-### Find the deployed app at [Link](https://tensionflowcharpredict.streamlit.app/)
+Streamlit App hosted at (https://tensionflowcharpredict.streamlit.app/)
+
 
 1. Replicate the [notebook](https://nipunbatra.github.io/ml-teaching/notebooks/names.html) on the next character prediction and use it for generation of text. Use one of the datasets specified below for training. Refer to Andrej Karpathy’s blog post on [Effectiveness of RNNs](http://karpathy.github.io/2015/05/21/rnn-effectiveness/). Visualise the embeddings using t-SNE if using more than 2 dimensions or using a scatter plot if using 2 dimensions. Write a streamlit application which asks users for an input text and it then predicts next k characters **[5 marks]**
 
@@ -49,6 +41,9 @@ streamlit run app.py
    * learn logistic regression models on the same data with additional features (such as x1*x2, x1^2, etc.)
 
 Show the decision surface and comment on the plots obtained for different models. **[2 marks]**
+
+![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/media/MLPXOR.svg)
+
 
 3. Using the [Mauna Lua CO2 dataset](https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv) (monthly) perform forecasting using an MLP and compare the results with that of MA (Moving Average) and ARMA (Auto Regressive Moving Average)  models. Main setting: use previous “K” readings to predict next “T” reading. Example, if “K=3” and “T=1” then we use data from Jan, Feb, March and then predict the reading for April. Comment on why you observe such results. For MA or ARMA you can use any library or implement it from scratch. The choice of MLP is up to you. **[2 marks]**
 4. Train on MNIST dataset using an MLP. The original training dataset contains 60,000 images and test contains 10,000 images. If you are short on compute, use a stratified subset of a smaller number of images. But, the test set remains the same 10,000 images. Compare against RF and Logistic Regression models.  The metrics can be: F1-score, confusion matrix. What do you observe? What all digits are commonly confused?
