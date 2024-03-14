@@ -42,8 +42,7 @@ Streamlit App hosted at (https://tensionflowcharpredict.streamlit.app/)
 
 Show the decision surface and comment on the plots obtained for different models. **[2 marks]**
 
-![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/media/MLPXOR.svg)
-
+![](https://github.com/Robohrriday/ML_2024_TensionFlow_A3/blob/main/media/MLP_XOR.svg)
 
 3. Using the [Mauna Lua CO2 dataset](https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv) (monthly) perform forecasting using an MLP and compare the results with that of MA (Moving Average) and ARMA (Auto Regressive Moving Average)  models. Main setting: use previous “K” readings to predict next “T” reading. Example, if “K=3” and “T=1” then we use data from Jan, Feb, March and then predict the reading for April. Comment on why you observe such results. For MA or ARMA you can use any library or implement it from scratch. The choice of MLP is up to you. **[2 marks]**
 4. Train on MNIST dataset using an MLP. The original training dataset contains 60,000 images and test contains 10,000 images. If you are short on compute, use a stratified subset of a smaller number of images. But, the test set remains the same 10,000 images. Compare against RF and Logistic Regression models.  The metrics can be: F1-score, confusion matrix. What do you observe? What all digits are commonly confused?
